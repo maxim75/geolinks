@@ -1,0 +1,26 @@
+{
+  "name": "geolinks",
+  "version": "0.0.1",
+  "description": "Links to resources with geographical coordinates",
+  "author": "Maksym Kozlenko <max@kozlenko.info>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxim75/geolinks.git"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-coveralls": "^0.1.4",
+    "gulp-jshint": "^1.11.2",
+    "gulp-qunit": "^1.2.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.6",
+    "jshint-stylish": "^2.0.1"
+  },
+  "scripts": {
+    "test": "gulp"
+  },
+  "license": "MIT"
+}

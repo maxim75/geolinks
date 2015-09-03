@@ -1,44 +1,82 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Geolinks by maxim75</title>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Geolinks</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <link href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="//code.jquery.com/qunit/qunit-1.17.0.css" rel="stylesheet" type="text/css" />
+ 
+        <style>
+            /* CSS here */
+        </style>
+    </head>
+    <body>
+        <input type="text" data-bind="value: lat">
+        <input type="text" data-bind="value: lng">
+        <input type="text" data-bind="value: template">
+        <div data-bind="text: templateResult"></div>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Geolinks</h1>
-        <p>Project description</p>
+        <table class="table">
+            <tbody data-bind="foreach: geolink.resources">
+                <tr>
+                    <td data-bind="text: id"></td>
+                    <td>
+                        <div data-bind="foreach: $data['tags'] ? tags : []">
+                            <span class="label label-default" data-bind="text: $data"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="#" data-bind="text: geolink.getLink(id, $parent.data()), attr: { href: geolink.getLink(id, $parent.data()) }"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-        <ul>
-          <li><a href="https://github.com/maxim75/geolinks/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/maxim75/geolinks/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/maxim75/geolinks">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <p>Hello</p>
-      </section>
-      <footer>
-       
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-1286259-13");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
+        <script src="//cdn.jsdelivr.net/jquery/2.1.4/jquery.min.js"></script>
+        <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+        <script src="//cdn.jsdelivr.net/underscorejs/1.8.2/underscore-min.js"></script>
+        <script src="//cdn.jsdelivr.net/knockout/3.3.0/knockout.js"></script>
+        <script src="//cdn.jsdelivr.net/knockout.validation/1.0.2/knockout.validation.min.js"></script>
+        <script src="//code.jquery.com/qunit/qunit-1.17.0.js"></script>
+        <script src="http://sinonjs.org/releases/sinon-1.12.2.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script src="https://cdn.rawgit.com/maxim75/geospatialjs/master/dist/geospatialjs.js"></script>
+        <script src="https://cdn.rawgit.com/maxim75/geolinks/0.1/dist/geolinks.js"></script>
+        <script>
+        var Vm = function() {
+          var self = this;
 
-  </body>
+          var eng = ["-34.06681", "151.01366"];
+          var syd = ["-33.865", "151.209444"];
+          var ny =  ["40.7127", "-74.0059"];
+
+          var loc = ny;
+
+          self.lat = ko.observable(loc[0]);
+          self.lng = ko.observable(loc[1]);
+          self.template = ko.observable("{bbSouth} {bbNorth} {bbEast} {bbWest}");
+
+          self.data = ko.computed(function() {
+            return {
+              lat: parseFloat(self.lat()),
+              lng: parseFloat(self.lng()),
+              zoom: 18,
+              title: "Max Test",
+              language: "en"
+            };
+          });
+
+          self.templateResult = ko.computed(function() {
+            return geolink.getLinkFromTemplate(self.template(), self.data());
+          });
+        };
+
+        var vm = new Vm();
+        ko.applyBindings(vm, $("body")[0]);
+        </script>
+    </body>
+  
 </html>

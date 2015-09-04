@@ -7,36 +7,49 @@
       <meta name="viewport" content="width=device-width, initial-scale=1"> 
       <link href="jslib/bootstrap.min.css" rel="stylesheet" type="text/css" />
       <link href="jslib/jquery-ui.min.css" rel="stylesheet" type="text/css" />
-
-      <style>
-          /* CSS here */
-      </style>
+      <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <div class="container">
 
       <h1>geolinks</h1>
+      <h4>version <span data-bind="text: version"></span></h4>
 
-      <p>Links to geographical web resources</p>
+      <p>Generate URLs to various geographical web resources</p>
+
+      <h3>Download</h3>
 
       <ul class="list-unstyled">
         <li>
-          <a href="https://cdn.rawgit.com/maxim75/geolinks/0.1/dist/geolinks.min.js">geolinks.min.js</a>
+          <a data-bind="attr: { href: minJsLink }">geolinks.min.js</a>
         </li>
         <li>
-          <a href="https://cdn.rawgit.com/maxim75/geolinks/0.1/dist/geolinks.js">geolinks.js</a>
+          <a data-bind="attr: { href: jsLink }">geolinks.js</a>
         </li>
         <li>
           <a href="https://github.com/maxim75/geolinks">Project on GitHub</a>
         </li>
       </ul>
+
+      <h3>Quick start</h3>
+
+      <p>Following code generates link to Google Maps centered at Sydney, Australia</p>
+
+      <pre>
+        // get link to Google Map (resource ID: "google")
+        var googleMapLink = geolink.getLink("google", { lat: -33.865, lng: 151.209, zoom: 10 });</pre>
+
+      <p><code>googleMapLink</code> is set to <code><a href="https://maps.google.com/maps?ll=-33.865,151.209&q=-33.865,151.209&hl=en&t=m&z=10">https://maps.google.com/maps?ll=-33.865,151.209&q=-33.865,151.209&hl=en&t=m&z=10</a></code>
+      </p>
+
+      <h3><span data-bind="text: geolink.resources.length"></span> Available Resources</h3>
       
       <div class="row">
         <div class="col-md-12">
            <form>
               <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" placeholder="Address" data-bind="value: address, element: addressInputTextElement">
+                <input type="text" class="form-control" id="address" placeholder="Location address, for example city, street, etc" data-bind="value: address, element: addressInputTextElement">
               </div>
             </form>
         </div>
@@ -60,6 +73,12 @@
       <div class="row">
         <div class="col-md-12">
           <table class="table">
+            <thead>
+              <tr>
+                <th>Resource ID</th>
+                <th>Generated URL</th>
+              </tr>
+            </thead>
             <tbody data-bind="foreach: geolink.resources">
                 <tr>
                     <td data-bind="text: id"></td>
@@ -85,7 +104,7 @@
     <script src="jslib/knockout.validation.min.js"></script>
     <script src="jslib/bootstrap.min.js"></script>
     <script src="https://cdn.rawgit.com/maxim75/geospatialjs/master/dist/geospatialjs.js"></script>
-    <script src="https://cdn.rawgit.com/maxim75/geolinks/0.1/dist/geolinks.js"></script>
+    <script src="https://cdn.rawgit.com/maxim75/geolinks/0.2/dist/geolinks.js"></script>
 
     <script src="script.js"></script>
   </body>

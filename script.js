@@ -22,14 +22,24 @@ var Vm = function() {
 	var self = this;
 
 	var syd = ["-33.865", "151.209444"];
-
+	
 	var loc = syd;
 
+	self.version = "0.2";
 	self.address = ko.observable();
 	self.addressInputTextElement = ko.observable();
 	self.lat = ko.observable(loc[0]);
 	self.lng = ko.observable(loc[1]);
 	self.template = ko.observable("{bbSouth} {bbNorth} {bbEast} {bbWest}");
+
+	self.minJsLink = ko.computed(function() {
+		return "https://cdn.rawgit.com/maxim75/geolinks/" + self.version + "/dist/geolinks.min.js";
+	});
+
+	self.jsLink = ko.computed(function() {
+		return "https://cdn.rawgit.com/maxim75/geolinks/" + self.version + "/dist/geolinks.js";
+	});
+
 
 	self.data = ko.computed(function() {
 		return {

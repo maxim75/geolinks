@@ -1,25 +1,65 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="chrome=1">
-        <title>Geolinks</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1"> 
-        <link href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="//code.jquery.com/qunit/qunit-1.17.0.css" rel="stylesheet" type="text/css" />
- 
-        <style>
-            /* CSS here */
-        </style>
-    </head>
-    <body>
-        <input type="text" data-bind="value: lat">
-        <input type="text" data-bind="value: lng">
-        <input type="text" data-bind="value: template">
-        <div data-bind="text: templateResult"></div>
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="chrome=1">
+      <title>Geolinks</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1"> 
+      <link href="jslib/bootstrap.min.css" rel="stylesheet" type="text/css" />
+      <link href="jslib/jquery-ui.min.css" rel="stylesheet" type="text/css" />
 
-        <table class="table">
+      <style>
+          /* CSS here */
+      </style>
+  </head>
+  <body>
+    <div class="container">
+
+      <h1>geolinks</h1>
+
+      <p>Links to geographical web resources</p>
+
+      <ul class="list-unstyled">
+        <li>
+          <a href="https://cdn.rawgit.com/maxim75/geolinks/0.1/dist/geolinks.min.js">geolinks.min.js</a>
+        </li>
+        <li>
+          <a href="https://cdn.rawgit.com/maxim75/geolinks/0.1/dist/geolinks.js">geolinks.js</a>
+        </li>
+        <li>
+          <a href="https://github.com/maxim75/geolinks">Project on GitHub</a>
+        </li>
+      </ul>
+      
+      <div class="row">
+        <div class="col-md-12">
+           <form>
+              <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" placeholder="Address" data-bind="value: address, element: addressInputTextElement">
+              </div>
+            </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="latitude">Latitude</label>
+            <input type="text" class="form-control" id="latitude" placeholder="Latitude"  data-bind="value: lat">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="longitude">Longitude</label>
+            <input type="text" class="form-control" id="longitude" placeholder="Longitude"  data-bind="value: lng">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table">
             <tbody data-bind="foreach: geolink.resources">
                 <tr>
                     <td data-bind="text: id"></td>
@@ -33,50 +73,20 @@
                     </td>
                 </tr>
             </tbody>
-        </table>
+          </table>
+        </div>
+      </div>
+    </div>
 
-        <script src="//cdn.jsdelivr.net/jquery/2.1.4/jquery.min.js"></script>
-        <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-        <script src="//cdn.jsdelivr.net/underscorejs/1.8.2/underscore-min.js"></script>
-        <script src="//cdn.jsdelivr.net/knockout/3.3.0/knockout.js"></script>
-        <script src="//cdn.jsdelivr.net/knockout.validation/1.0.2/knockout.validation.min.js"></script>
-        <script src="//code.jquery.com/qunit/qunit-1.17.0.js"></script>
-        <script src="http://sinonjs.org/releases/sinon-1.12.2.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        <script src="https://cdn.rawgit.com/maxim75/geospatialjs/master/dist/geospatialjs.js"></script>
-        <script src="https://cdn.rawgit.com/maxim75/geolinks/0.1/dist/geolinks.js"></script>
-        <script>
-        var Vm = function() {
-          var self = this;
+    <script src="jslib/jquery.min.js"></script>
+    <script src="jslib/jquery-ui.min.js"></script>
+    <script src="jslib/underscore-min.js"></script>
+    <script src="jslib/knockout-min.js"></script>
+    <script src="jslib/knockout.validation.min.js"></script>
+    <script src="jslib/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/maxim75/geospatialjs/master/dist/geospatialjs.js"></script>
+    <script src="https://cdn.rawgit.com/maxim75/geolinks/0.1/dist/geolinks.js"></script>
 
-          var eng = ["-34.06681", "151.01366"];
-          var syd = ["-33.865", "151.209444"];
-          var ny =  ["40.7127", "-74.0059"];
-
-          var loc = ny;
-
-          self.lat = ko.observable(loc[0]);
-          self.lng = ko.observable(loc[1]);
-          self.template = ko.observable("{bbSouth} {bbNorth} {bbEast} {bbWest}");
-
-          self.data = ko.computed(function() {
-            return {
-              lat: parseFloat(self.lat()),
-              lng: parseFloat(self.lng()),
-              zoom: 18,
-              title: "Max Test",
-              language: "en"
-            };
-          });
-
-          self.templateResult = ko.computed(function() {
-            return geolink.getLinkFromTemplate(self.template(), self.data());
-          });
-        };
-
-        var vm = new Vm();
-        ko.applyBindings(vm, $("body")[0]);
-        </script>
-    </body>
-  
+    <script src="script.js"></script>
+  </body>
 </html>

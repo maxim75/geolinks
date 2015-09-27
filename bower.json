@@ -1,0 +1,22 @@
+{
+  "name": "geolinks",
+  "version": "0.0.2",
+  "homepage": "https://github.com/maxim75/geolinks",
+  "authors": [
+    "Maksym Kozlenko <max@kozlenko.info>"
+  ],
+  "description": "Links to resources with geographical coordinates",
+  "main": "dist/geolinks.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}

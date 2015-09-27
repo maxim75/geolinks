@@ -115,7 +115,15 @@
             id: "osm missing streets",
             template: "http://tools.geofabrik.de/osmi/?view=highways&lon={londegdec}&lat={latdegdec}&zoom={osmzoom}&overlays=name_missing_major,name_missing_minor",
             tags: [ "osm" ]
-        }
+        },
+
+        {
+            id: "geohack",
+            template: "https://tools.wmflabs.org/geohack/geohack.php?pagename=Test&params={latdegabs}_{latminint}_{latsecdec}_{latNS}_{londegabs}_{lonminint}_{lonsecdec}_{lonEW}",
+            tags: [ ]
+        },
+
+        
     ];
 
     mod.resourcesHash = {};

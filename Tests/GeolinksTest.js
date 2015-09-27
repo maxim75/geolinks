@@ -58,7 +58,14 @@
 		equal(mod.getLinkFromTemplate("{latsecdec}", getTestData()), "60.0000");
 	});
 
+	//---------------
+
 	test("osm", function() {
 		equal(mod.getLink("osm", getTestData()), "https://www.openstreetmap.org/?mlat=-1.2&mlon=-3.4&zoom=8&layers=M");
 	});
+
+	test("geohack", function() {
+		equal(mod.getLink("geohack", getTestData()), "https://tools.wmflabs.org/geohack/geohack.php?pagename=Test&params=1_11_60.0000_S_3_23_60.0000_W");
+	});
+
 })(geolink);

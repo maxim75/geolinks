@@ -177,7 +177,7 @@
 
         {
             id: "mapillary",
-            template: "http://www.mapillary.com/map/search/{bbSouth}/{bbNorth}/{bbWest}/{bbEast}",
+            template: "http://www.mapillary.com/map/search/{latdegdec}/{londegdec}/{osmzoom}",
             tags: [ "photo" ]
         },
 

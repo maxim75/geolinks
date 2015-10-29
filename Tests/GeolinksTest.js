@@ -43,7 +43,7 @@
 	});
 
 	test("latdegabs", function() {
-		equal(mod.getLinkFromTemplate("{latdegabs}", getTestData()), "1");
+		equal(mod.getLinkFromTemplate("{latdegabs}", getTestData()), "1"); 
 	});
 
 	test("latminint", function() {
@@ -66,6 +66,10 @@
 
 	test("geohack", function() {
 		equal(mod.getLink("geohack", getTestData()), "https://tools.wmflabs.org/geohack/geohack.php?pagename=Test&params=1_11_60.0000_S_3_23_60.0000_W");
+	});
+
+	test("mapillary", function() {
+		equal(mod.getLink("mapillary", getTestData()), "http://www.mapillary.com/map/search/-1.2/-3.4/8");
 	});
 
 })(geolink);

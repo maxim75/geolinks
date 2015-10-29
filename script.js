@@ -1,14 +1,3 @@
-self.getLocaionList = function(search, callback) {
-		self.loading(true);
-		$.ajax({ 
-			method: "GET",
-			url: "https://open.mapquestapi.com/nominatim/v1/search", 
-			data: { format: "json", q: search }
-		})
-		.done(function(response) { self.onSearchResponse(response, callback) })
-		.fail(function(result) { trace("LocationSearchView nominatim call error", result); })
-		.always(function() { self.loading(false); });	
-	};
 
 ko.bindingHandlers.element = {
     init: function (element, valueAccessor) {
@@ -56,36 +45,14 @@ var Vm = function() {
 	});
 
 	self.addressInputTextElement.subscribe(function() {
-		$(self.addressInputTextElement()).autocomplete({
-			minLength: 3,
-      
-			source: function(request, response ) {
-				$.ajax({ 
-					method: "GET",
-					url: "https://open.mapquestapi.com/nominatim/v1/search", 
-					data: { format: "json", q: request.term }
-				})
-				.done(function(result) { 
-					var list = _(result).map(function(x) {
-						return { label: x.display_name, lat: x.lat, lng: x.lon };
-					});
-					response(list);
-				});
-			},
+		var autocomplete = new google.maps.places.Autocomplete(self.addressInputTextElement(), {});
+			google.maps.event.addListener(autocomplete, 'place_changed', function() {
+	        var place = autocomplete.getPlace();
+	        console.log(place.geometry.location.lng());
 
-			select: function( event, ui ) {
-				self.lat(ui.item.lat);
-				self.lng(ui.item.lng);
-			}
-		});
-
-		$(self.addressInputTextElement()).data("ui-autocomplete")._renderItem = function (ul, item) {
-			var $li = $("<li></li>");
-			$li.text(item.label);
-			ul.append($li);
-
-			return $li;
-		};
+	        self.lat(place.geometry.location.lat());
+			self.lng(place.geometry.location.lng());
+	    });
 	});
 };
 

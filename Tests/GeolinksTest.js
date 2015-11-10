@@ -72,4 +72,22 @@
 		equal(mod.getLink("mapillary", getTestData()), "http://www.mapillary.com/map/search/-1.2/-3.4/8");
 	});
 
+	test("wikimapia", function() {
+		equal(mod.getLink("wikimapia", getTestData()), "http://wikimapia.org/#lang=en&lat=-1.2&lon=-3.4&z=8");
+	});
+
+	test("geocaching", function() {
+		equal(mod.getLink("geocaching", getTestData()), "https://www.geocaching.com/map/?ll=-1.2,-3.4&z=8");
+	});
+
+	test("waze", function() {
+		equal(mod.getLink("waze", getTestData()), "https://www.waze.com/livemap/?zoom=8&lat=-1.2&lon=-3.4");
+	});
+
+	test("fotki.yandex.ru", function() {
+		equal(mod.getLink("fotki.yandex.ru", getTestData()), "https://fotki.yandex.ru/map/?lng=-1.2&lat=-3.4&zoom=8");
+	});
+
+	
+
 })(geolink);

@@ -43,6 +43,12 @@
         },
 
         { 
+            id: "fotki.yandex.ru", 
+            template: "https://fotki.yandex.ru/map/?lng={latdegdec}&lat={londegdec}&zoom={osmzoom}",
+            tags: [ "photo" ]
+        },
+
+        { 
             id: "visicom", 
             template: "http://maps.visicom.ua/#lng={londegdec};lat={latdegdec};z=6;map=ukraine_en;lngm={londegdec};latm={latdegdec};",
             tags: [ "country-ua" ]
@@ -122,6 +128,27 @@
             template: "https://tools.wmflabs.org/geohack/geohack.php?pagename=Test&params={latdegabs}_{latminint}_{latsecdec}_{latNS}_{londegabs}_{lonminint}_{lonsecdec}_{lonEW}",
             tags: [ ]
         },
+
+        {
+            id: "wikimapia",
+            template: "http://wikimapia.org/#lang=en&lat={latdegdec}&lon={londegdec}&z={osmzoom}",
+            tags: [ ]
+        },
+
+        {
+            id: "geocaching",
+            template: "https://www.geocaching.com/map/?ll={latdegdec},{londegdec}&z={osmzoom}",
+            tags: [ ]
+        },
+
+        {
+            id: "waze",
+            template: "https://www.waze.com/livemap/?zoom={osmzoom}&lat={latdegdec}&lon={londegdec}",
+            tags: [ ]
+        },
+
+        
+
 
         
     ];

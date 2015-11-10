@@ -203,7 +203,7 @@ var ResourceLink = React.createClass({
 
 
 ReactDOM.render(
-	<GeolinksHomePage version="0.3" />,
+	<GeolinksHomePage version="0.4" />,
 	document.getElementById('content')
 );
 

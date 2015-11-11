@@ -28,7 +28,7 @@
 
         { 
             id: "wikimapia", 
-            template: "http://wikimapia.org/#lang={language}&lat={latdegdec}&lon={londegdec}&z={osmzoom}&m=w"
+            template: "http://wikimapia.org/#lang={language}&lat={latdegdec}&lon={londegdec}&z={osmzoom}"
         },
 
         { 
@@ -126,12 +126,6 @@
         {
             id: "geohack",
             template: "https://tools.wmflabs.org/geohack/geohack.php?pagename=Test&params={latdegabs}_{latminint}_{latsecdec}_{latNS}_{londegabs}_{lonminint}_{lonsecdec}_{lonEW}",
-            tags: [ ]
-        },
-
-        {
-            id: "wikimapia",
-            template: "http://wikimapia.org/#lang=en&lat={latdegdec}&lon={londegdec}&z={osmzoom}",
             tags: [ ]
         },
 

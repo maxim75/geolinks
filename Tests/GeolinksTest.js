@@ -73,7 +73,7 @@
 	});
 
 	test("wikimapia", function() {
-		equal(mod.getLink("wikimapia", getTestData()), "http://wikimapia.org/#lang=en&lat=-1.2&lon=-3.4&z=8");
+		equal(mod.getLink("wikimapia", getTestData()), "http://wikimapia.org/#lang=uk&lat=-1.2&lon=-3.4&z=8");
 	});
 
 	test("geocaching", function() {

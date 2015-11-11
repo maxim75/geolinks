@@ -251,6 +251,6 @@ var ResourceLink = React.createClass({
 
 
 ReactDOM.render(
-	<GeolinksHomePage version="0.4" />,
+	<GeolinksHomePage version="0.5" />,
 	document.getElementById('content')
 );

@@ -1,6 +1,54 @@
 
+window.setLocationUpdates = function(func) {
+    var onUpdate = function(position)
+    {
+        if(!position)
+            func(null);
+        else
+        {
+            var lat = parseFloat((position.coords) ? new String(position.coords.latitude) : position.x);
+            var lng = parseFloat((position.coords) ? new String(position.coords.longitude) : position.y);
+
+            func({
+                loc: [lat, lng],
+                accuracy: position.coords.accuracy,
+                altitude: position.coords.altitude,
+                speed: position.coords.speed,
+                altitudeAccuracy: position.coords.altitudeAccuracy,
+                heading: position.coords.heading,
+                date: new Date()
+            });
+        }
+    };
+
+    if(navigator.geolocation)
+        navigator.geolocation.watchPosition( 
+            onUpdate,
+            function(error) { },
+            {
+            maximumAge: 10000,
+            timeout: 5000,
+            enableHighAccuracy: true
+    	});
+};
+
 var GeolinksHomePage = React.createClass({
 	getInitialState: function() {
+
+		var self = this;
+
+		window.setLocationUpdates(function(data) {
+			if(data && data.loc) {
+				var locationData =self.state.locationData;
+				locationData.lat = data.loc[0];
+				locationData.lng = data.loc[1];
+				self.setState({
+					locationData: locationData
+				})
+				
+			}
+		});
+
 		return { 
 			locationData: {
 				lat: parseFloat("-34.06"),
@@ -206,5 +254,3 @@ ReactDOM.render(
 	<GeolinksHomePage version="0.4" />,
 	document.getElementById('content')
 );
-
-console.log("here");

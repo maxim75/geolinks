@@ -71,7 +71,7 @@
 		var convertFunc = function(x) {
 			return converters[x] ? converters[x](data) : x;
 		};
-		return template.replace(/\{.+?\}/mg, convertFunc);
+		return template.replace(/\{\S+?\}/mg, convertFunc);
 	};
 
 	mod.getLink = function(resourceId, data) {
@@ -110,7 +110,7 @@
 
         { 
             id: "wikimapia", 
-            template: "http://wikimapia.org/#lang={language}&lat={latdegdec}&lon={londegdec}&z={osmzoom}"
+            template: "http://wikimapia.org/#lang={language}&lat={latdegdec}&lon={londegdec}&z={osmzoom}&m=w"
         },
 
         { 
@@ -172,7 +172,7 @@
         {
             id: "flightradar24",
             template: "http://www.flightradar24.com/{latdegdec},{londegdec}/{osmzoom}",
-            tags: [  ]
+            tags: [ "transport" ]
         },
 
         {
@@ -212,6 +212,12 @@
         },
 
         {
+            id: "wikimapia",
+            template: "http://wikimapia.org/#lang=en&lat={latdegdec}&lon={londegdec}&z={osmzoom}",
+            tags: [ ]
+        },
+
+        {
             id: "geocaching",
             template: "https://www.geocaching.com/map/?ll={latdegdec},{londegdec}&z={osmzoom}",
             tags: [ ]
@@ -220,13 +226,65 @@
         {
             id: "waze",
             template: "https://www.waze.com/livemap/?zoom={osmzoom}&lat={latdegdec}&lon={londegdec}",
+            tags: [ "transport" ]
+        },
+
+
+        {
+            id: "marinetraffic",
+            template: "https://www.marinetraffic.com/en/ais/home/centerx:{londegdec}/centery:{latdegdec}/zoom:{osmzoom}",
+            tags: [ "transport" ]
+        },
+
+        {
+            id: "latlon",
+            template: "{latdegdec},{londegdec}",
+            tags: [ "geoformat" ]
+        },
+
+        {
+            id: "wkt",
+            template: "POINT({londegdec} {latdegdec})",
+            tags: [ "geoformat" ]
+        },
+
+        {
+            id: "geojson",
+            template: "{ \"type\": \"Point\", \"coordinates\": [ {londegdec}, {latdegdec} ] }",
+            tags: [ "geoformat" ]
+        },
+
+        {
+            id: "wikipedia template",
+            template: "{{Coord |{latdegdec}|{londegdec}display=title} }",
+            tags: [ "geoformat" ]
+        },
+
+        {
+            id: "wikimedia commons location",
+            template: "{{Location dec|{latdegdec}|{londegdec}}}",
+            tags: [ "geoformat" ]
+        },
+        
+        {
+            id: "geo uri",
+            template: "geo:{latdegdec},{londegdec}",
+            tags: [ "geoformat" ]
+        },
+
+        {
+            id: "geonames google",
+            template: "http://www.geonames.org/maps/google_{latdegdec}_{londegdec}.html",
             tags: [ ]
         },
 
-        
+        {
+            id: "geolocator",
+            template: "http://tools.freeside.sk/geolocator/geolocator.html?params={latdegdec}_{londegdec}",
+            tags: [ ]
+        },
 
-
-        
+    
     ];
 
     mod.resourcesHash = {};

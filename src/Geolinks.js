@@ -71,7 +71,7 @@
 		var convertFunc = function(x) {
 			return converters[x] ? converters[x](data) : x;
 		};
-		return template.replace(/\{.+?\}/mg, convertFunc);
+		return template.replace(/\{\S+?\}/mg, convertFunc);
 	};
 
 	mod.getLink = function(resourceId, data) {

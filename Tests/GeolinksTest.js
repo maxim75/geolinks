@@ -73,7 +73,7 @@
 	});
 
 	test("wikimapia", function() {
-		equal(mod.getLink("wikimapia", getTestData()), "http://wikimapia.org/#lang=uk&lat=-1.2&lon=-3.4&z=8");
+		equal(mod.getLink("wikimapia", getTestData()), "http://wikimapia.org/#lang=en&lat=-1.2&lon=-3.4&z=8");
 	});
 
 	test("geocaching", function() {
@@ -88,6 +88,41 @@
 		equal(mod.getLink("fotki.yandex.ru", getTestData()), "https://fotki.yandex.ru/map/?lng=-1.2&lat=-3.4&zoom=8");
 	});
 
-	
+	test("marinetraffic", function() {
+		equal(mod.getLink("marinetraffic", getTestData()), "https://www.marinetraffic.com/en/ais/home/centerx:-3.4/centery:-1.2/zoom:8");
+	});
+
+	test("latlon", function() {
+		equal(mod.getLink("latlon", getTestData()), "-1.2,-3.4");
+	});
+
+	test("wkt", function() {
+		equal(mod.getLink("wkt", getTestData()), "POINT(-3.4 -1.2)");
+	});
+
+	test("geojson", function() {
+		equal(mod.getLink("geojson", getTestData()), "{ \"type\": \"Point\", \"coordinates\": [ -3.4, -1.2 ] }");
+	});
+
+	test("wikipedia template", function() {
+		equal(mod.getLink("wikipedia template", getTestData()), "{{Coord |-1.2|-3.4display=title} }");
+	});
+
+	test("wikimedia commons location", function() {
+		equal(mod.getLink("wikimedia commons location", getTestData()), "{{Location dec|-1.2|-3.4}}");
+	});
+
+	test("geo uri", function() {
+		equal(mod.getLink("geo uri", getTestData()), "geo:-1.2,-3.4");
+	});
+
+	test("geonames google", function() {
+		equal(mod.getLink("geonames google", getTestData()), "http://www.geonames.org/maps/google_-1.2_-3.4.html");
+	});
+
+	test("geolocator", function() {
+		equal(mod.getLink("geolocator", getTestData()), "http://tools.freeside.sk/geolocator/geolocator.html?params=-1.2_-3.4");
+	});
+
 
 })(geolink);

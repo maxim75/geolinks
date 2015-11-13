@@ -3,6 +3,7 @@
 body {
    position: relative;
 }
+
 body:after {
     content : "";
     display: block;
@@ -16,4 +17,12 @@ body:after {
     height: 100%;
     opacity : 0.15;
     z-index: -1;
+}
+
+a:not([href]) {
+	color: black;
+}
+
+a:not([href]):hover {
+	text-decoration: none;
 }

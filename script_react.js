@@ -41,10 +41,40 @@ window.setLocationUpdates = function(func) {
     	});
 };
 
+GlPage.parseParameterString = function(str) {
+    var match,
+        pl = /\+/g, // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g,
+        decode = function(s) { return decodeURIComponent(s.replace(pl, " ")); },
+        query = str;
+
+    var result = {};
+    while (match = search.exec(query))
+        result[decode(match[1])] = decode(match[2]);
+    return result;
+};
+
 var GeolinksHomePage = React.createClass({
 	getInitialState: function() {
 
 		var self = this;
+
+		var urlParameters = GlPage.parseParameterString(window.location.search.substring(1));
+
+		var data = geolink.parseUrl(urlParameters["q"]);
+		
+		if(!data) {
+			data = {
+				lat: -34.06,
+				lng: 151.1,
+				zoom: 18,
+				title: "Title",
+				language: "en"
+			};
+		}
+
+		data.lat = parseFloat(data.lat);
+		data.lng = parseFloat(data.lng);
 
 		window.setLocationUpdates(function(data) {
 			if(data && data.loc) {
@@ -58,15 +88,7 @@ var GeolinksHomePage = React.createClass({
 			}
 		});
 
-		return { 
-			locationData: {
-				lat: parseFloat("-34.06"),
-				lng: parseFloat("151.1"),
-				zoom: 18,
-				title: "Title",
-				language: "en"
-			}
-		};
+		return { locationData: data	};
 	},
 
 	onFormChange: function(newLocationData) {
@@ -139,7 +161,6 @@ var LocationForm = React.createClass({
 	},
 
 	componentDidMount: function() {
-		console.log("componentDidMount", arguments);
 	},
 
 	latChange: function(event) {

@@ -9,7 +9,7 @@
 
  (function(mod) {
 
-	
+ 	var fieldMatchRegExp = /\{\S+?\}/mg;
 
 	var toDms = function(deg) {
         var d = parseInt(deg, 10);
@@ -46,7 +46,24 @@
 		};
 	};
 
-	var converters = {
+	var defaultData = {
+		lat: 0, 
+		lng:  0, 
+		zoom: 15, 
+		title: "", 
+		language: "en"
+	};
+
+	var extendObject = function(obj1, obj2) {
+       for (var i in obj2) {
+          if (!obj1.hasOwnProperty(i)) {
+             obj1[i] = obj2[i];
+          }
+       }
+       return obj1;
+    };
+
+	mod.converters = {
 		"{latdegdec}": function(data) { return data.lat; },
 		"{londegdec}": function(data) { return data.lng; },
 		"{osmzoom}": function(data) { return data.zoom; },
@@ -67,16 +84,41 @@
 		"{bbWest}": function(data) { return toBoundingBox(data).west; },
 	};
 
+	mod.parsers = [
+		{ 
+			n: "lat,lng",
+			r: /(-?\d+\.\d+)[;, ](-?\d+\.\d+)/, 
+			f: function(r) { 
+				return (r && r.length === 3) ? { lat: r[1], lng: r[2] } : null; 
+			} 
+		} 
+	];
+
 	mod.getLinkFromTemplate = function(template, data) {
 		var convertFunc = function(x) {
-			return converters[x] ? converters[x](data) : x;
+			return mod.converters[x] ? mod.converters[x](data) : x;
 		};
-		return template.replace(/\{\S+?\}/mg, convertFunc);
+		return template.replace(fieldMatchRegExp, convertFunc);
+	};
+
+	mod.getFieldsFromTemplate = function(template) {
+		return template.match(fieldMatchRegExp);
 	};
 
 	mod.getLink = function(resourceId, data) {
 		var resource = mod.resourcesHash[resourceId];
 		return mod.getLinkFromTemplate(resource.template, data);
+	};
+
+	mod.parseUrl = function(url) {
+		var result = {};
+
+		for(var formatIdx in mod.parsers) {
+			var parser = mod.parsers[formatIdx];
+			result = parser.f(url.match(parser.r));
+			if(result) break;
+		}
+		return result ? extendObject(result, defaultData) : null;
 	};
 
 })(geolink);

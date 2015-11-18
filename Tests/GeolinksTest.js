@@ -18,6 +18,14 @@
 		ok(mod.resources);
 	});
 
+	test("getFieldsFromTemplate", function() {
+		var result = mod.getFieldsFromTemplate("{a}aaa{b}--{xyz}");
+		equal(result.length, 3);
+		equal(result[0], "{a}");
+		equal(result[1], "{b}");
+		equal(result[2], "{xyz}");
+	});
+
 	test("latdegdec", function() {
 		equal(mod.getLinkFromTemplate("{latdegdec}", getTestData()), "-1.2");
 	});
@@ -58,7 +66,16 @@
 		equal(mod.getLinkFromTemplate("{latsecdec}", getTestData()), "60.0000");
 	});
 
-	//---------------
+})(geolink);
+
+(function (mod) {
+    "use strict";
+
+    QUnit.module("Geolinks getLink");
+
+    var getTestData = function() {
+    	return { lat: -1.2, lng: -3.4, zoom: 8, title: "ABC DEF", language: "uk" };
+    };
 
 	test("osm", function() {
 		equal(mod.getLink("osm", getTestData()), "https://www.openstreetmap.org/?mlat=-1.2&mlon=-3.4&zoom=8&layers=M");
@@ -123,6 +140,35 @@
 	test("geolocator", function() {
 		equal(mod.getLink("geolocator", getTestData()), "http://tools.freeside.sk/geolocator/geolocator.html?params=-1.2_-3.4");
 	});
+})(geolink);
 
 
+(function (mod) {
+    "use strict";
+
+    QUnit.module("Geolinks parseUrl");
+
+    test("parseUrl invalid", function() {
+		equal(null, mod.parseUrl("ABC"));
+	});
+
+	test("parseUrl lat,lng", function() {
+		var result = mod.parseUrl("test/1.2,-34.567/zzz");
+		equal(result.lat, 1.2);
+		equal(result.lng, -34.567);
+		equal(result.language, "en");
+		equal(result.zoom, 15);
+	});
+
+	test("parseUrl lat lng", function() {
+		var result = mod.parseUrl("aaa 1.2 -34.567 NNNN");
+		equal(result.lat, 1.2);
+		equal(result.lng, -34.567);
+	});
+
+	test("parseUrl lat;lng", function() {
+		var result = mod.parseUrl("aaa 1.2;-34.567 NNNN");
+		equal(result.lat, 1.2);
+		equal(result.lng, -34.567);
+	});
 })(geolink);

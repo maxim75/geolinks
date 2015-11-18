@@ -61,7 +61,7 @@ var GeolinksHomePage = React.createClass({
 
 		var urlParameters = GlPage.parseParameterString(window.location.search.substring(1));
 
-		var data = geolink.parseUrl(urlParameters["q"]);
+		var data = urlParameters["q"] ? geolink.parseUrl(urlParameters["q"]) : null;
 		
 		if(!data) {
 			data = {

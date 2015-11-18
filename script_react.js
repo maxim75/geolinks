@@ -134,6 +134,7 @@ var GeolinksHomePage = React.createClass({
 var LocationForm = React.createClass({
 	getInitialState: function() {
 		return { 
+			address: ""
 		};
 	},
 
@@ -150,6 +151,20 @@ var LocationForm = React.createClass({
 		var lng = parseFloat(event.target.value);
 		this.props.onChange({ lat: this.props.locationData.lat, lng: lng });
 	},
+
+	addressChange: function(event) {
+		var address = event.target.value;
+
+		this.setState({
+			address: address
+		});
+
+		var data = geolink.parseUrl(address);
+		if(data) {
+			this.props.onChange({ lat: data.lat, lng: data.lng });
+		}
+	},
+
 
 	toFixedDecimals: function(value, precision) {
 		return parseFloat(value.toFixed(precision));
@@ -177,7 +192,7 @@ var LocationForm = React.createClass({
 	           <form>
 	              <div className="form-group">
 	                <label htmlFor="address">Address</label>
-	                <input type="text" className="form-control" id="address" placeholder="Location address, for example city, street, etc" ref={this.addressRef} />
+	                <input type="text" className="form-control" id="address" value={this.state.address} onChange={this.addressChange} placeholder="Location address, for example city, street, etc" ref={this.addressRef} />
 	              </div>
 	            </form>
 	        </div>
@@ -258,6 +273,6 @@ var ResourceLink = React.createClass({
 
 
 ReactDOM.render(
-	<GeolinksHomePage version="0.6" />,
+	<GeolinksHomePage version="0.7" />,
 	document.getElementById('content')
 );

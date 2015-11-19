@@ -8,7 +8,7 @@ GlPage.isURL = function(str) {
 };
 
 
-window.setLocationUpdates = function(func) {
+GlPage.setLocationUpdates = function(func) {
     var onUpdate = function(position)
     {
         if(!position)
@@ -54,14 +54,15 @@ GlPage.parseParameterString = function(str) {
     return result;
 };
 
-var GeolinksHomePage = React.createClass({
+GlPage.GeolinksHomePage = React.createClass({
 	getInitialState: function() {
 
 		var self = this;
 
 		var urlParameters = GlPage.parseParameterString(window.location.search.substring(1));
 
-		var data = urlParameters["q"] ? geolink.parseUrl(urlParameters["q"]) : null;
+		var query = urlParameters["q"];
+		var data = query ? geolink.parseUrl(query) : null;
 		
 		if(!data) {
 			data = {
@@ -76,25 +77,40 @@ var GeolinksHomePage = React.createClass({
 		data.lat = parseFloat(data.lat);
 		data.lng = parseFloat(data.lng);
 
-		window.setLocationUpdates(function(data) {
+		GlPage.setLocationUpdates(function(data) {
+
 			if(data && data.loc) {
-				var locationData =self.state.locationData;
-				locationData.lat = data.loc[0];
-				locationData.lng = data.loc[1];
+				console.log("location update", data);
 				self.setState({
-					locationData: locationData
-				})
-				
+					gpsLocation: { lat: data.loc[0], lng: data.loc[1] }
+				});
+
+				if(self.state.useGps)
+				{
+					var locationData = self.state.locationData;
+					locationData.lat = data.loc[0];
+					locationData.lng = data.loc[1];
+					self.setState({
+						locationData: locationData
+					})
+				}
 			}
 		});
 
-		return { locationData: data	};
+		return { 
+			locationData: data,
+			useGps: !query
+		};
 	},
 
-	onFormChange: function(newLocationData) {
+	onFormChange: function(data) {
 		var locationData = this.state.locationData;
-		locationData.lat = newLocationData.lat;
-		locationData.lng = newLocationData.lng;
+
+		if(data.lat !== undefined) locationData.lat = data.lat;
+		if(data.lng !== undefined) locationData.lng = data.lng;
+		if(data.useGps !== undefined) {
+			this.setState({ useGps: data.useGps });
+		}
 
 		this.setState({
 			locationData: locationData
@@ -104,6 +120,21 @@ var GeolinksHomePage = React.createClass({
 	getJsLink: function(minified) {
 		return "https://cdn.rawgit.com/maxim75/geolinks/" + this.props.version + 
 			(minified ? "/dist/geolinks.min.js" : "/dist/geolinks.js");
+	},
+
+	componentWillUpdate: function(updatedState) {
+		//console.log("componentWillUpdate", arguments);
+		return;
+
+		// if(this.state.useGps && this.state.gpsLocation)
+		// {
+		// 	var locationData = this.state.locationData;
+		// 	locationData.lat = this.state.gpsLocation.lat;
+		// 	locationData.lng = this.state.gpsLocation.lng;
+		// 	this.setState({
+		// 		locationData: locationData
+		// 	});
+		// }
 	},
 
 	render: function() {
@@ -145,15 +176,15 @@ var GeolinksHomePage = React.createClass({
 
 					<h3>{ geolink.resources.length } Available Resources</h3>
 
-					<LocationForm onChange={ this.onFormChange } locationData={ this.state.locationData } />
-					<ResourceList locationData={ this.state.locationData } />
+					<GlPage.LocationForm onChange={ this.onFormChange } locationData={ this.state.locationData } useGps={ this.state.useGps } />
+					<GlPage.ResourceList locationData={ this.state.locationData } />
 				</div>
 			</div>
 		);
 	}
 });
 
-var LocationForm = React.createClass({
+GlPage.LocationForm = React.createClass({
 	getInitialState: function() {
 		return { 
 			address: ""
@@ -165,12 +196,12 @@ var LocationForm = React.createClass({
 
 	latChange: function(event) {
 		var lat = parseFloat(event.target.value);
-		this.props.onChange({ lat: lat, lng: this.props.locationData.lng });
+		this.props.onChange({ lat: lat });
 	},
 
 	lngChange: function(event) {
 		var lng = parseFloat(event.target.value);
-		this.props.onChange({ lat: this.props.locationData.lat, lng: lng });
+		this.props.onChange({ lng: lng });
 	},
 
 	addressChange: function(event) {
@@ -184,6 +215,10 @@ var LocationForm = React.createClass({
 		if(data) {
 			this.props.onChange({ lat: data.lat, lng: data.lng });
 		}
+	},
+
+	useGpsChange: function(event) {
+		this.props.onChange({ useGps: event.target.checked  });
 	},
 
 
@@ -206,6 +241,7 @@ var LocationForm = React.createClass({
 	},
 
 	render: function() {
+
 		return (
 			<div>
 			<div className="row">
@@ -233,35 +269,46 @@ var LocationForm = React.createClass({
 	          </div>
 	        </div>
 	      </div>
+
+	      <div className="row">
+	        <div className="col-md-12">
+	        	<div className="checkbox">
+				  <label>
+				    <input type="checkbox" checked={this.props.useGps} onChange={this.useGpsChange} /> Use GPS position
+				  </label>
+
+				</div>
+	        </div>
+	       </div>
+
+
+
 	      </div>
 		);
 	}
 });
 
 
-var ResourceList = React.createClass({
+GlPage.ResourceList = React.createClass({
 	render: function() {
 		var self = this;
 		
-
 		var resourceNodes = geolink.resources.map(function (x) {
 			return (
-				<ResourceLink key={x.id} id={x.id}  locationData={ self.props.locationData }>
-				</ResourceLink>
+				<GlPage.ResourceLink key={x.id} id={x.id}  locationData={ self.props.locationData }>
+				</GlPage.ResourceLink>
 			);
 		});
 
 		return (
-			<table className="table">
-				<tbody>
-					{ resourceNodes }
-				</tbody>
-			</table>
+			<div className="row">
+				{ resourceNodes }
+			</div>
 		);
 	}
 });
 
-var ResourceLink = React.createClass({
+GlPage.ResourceLink = React.createClass({
 	getUrl: function() { 
 		var link = geolink.getLink(this.props.id, this.props.locationData);
 		return GlPage.isURL(link) ? link : null;
@@ -278,22 +325,24 @@ var ResourceLink = React.createClass({
 		if(url) anchorOpts.href = url;
 
 		return (
-			<tr id={this.props.key}>
-				<td >
-					<p>{ this.props.id }</p>
-				</td>
-				<td>
-					<a {...anchorOpts}>
-						{ this.getTextValue() }
-					</a>
-				</td>
-			</tr>
+			<div className="container">
+				<div className="row link-grid" id={this.props.key}>
+					<div className="col-sm-6 col-xs-12">
+						<strong>{ this.props.id }</strong>
+					</div>
+					<div className="col-sm-6 col-xs-12">
+						<a {...anchorOpts}>
+							{ this.getTextValue() }
+						</a>
+					</div>
+				</div>
+			</div>
 		);
 	}
 });
 
 
 ReactDOM.render(
-	<GeolinksHomePage version="0.7" />,
+	<GlPage.GeolinksHomePage version="0.7" />,
 	document.getElementById('content')
 );

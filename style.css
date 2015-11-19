@@ -26,3 +26,8 @@ a:not([href]) {
 a:not([href]):hover {
 	text-decoration: none;
 }
+
+.link-grid [class^=col-] {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

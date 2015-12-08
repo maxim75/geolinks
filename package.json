@@ -1,0 +1,32 @@
+{
+  "name": "geolinks",
+  "version": "0.8.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxim75/geolinks.git"
+  },
+  "author": "Maksym Kozlenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxim75/geolinks/issues"
+  },
+  "homepage": "https://github.com/maxim75/geolinks#readme",
+  "devDependencies": {
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "bootstrap": "^3.3.6",
+    "browserify": "^12.0.1",
+    "gulp": "^3.9.0",
+    "jquery": "^2.1.4",
+    "jquery-ui": "^1.10.5",
+    "lodash": "^3.10.1",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

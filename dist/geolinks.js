@@ -122,6 +122,8 @@
 	};
 
 })(geolink);
+
+if(typeof module !== 'undefined') module.exports = geolink;
 /* 
  * Copyright (C) 2015 Maksym Kozlenko <max@kozlenko.info>
  *

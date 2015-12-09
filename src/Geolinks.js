@@ -122,3 +122,5 @@
 	};
 
 })(geolink);
+
+if(typeof module !== 'undefined') module.exports = geolink;

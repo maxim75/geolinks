@@ -7,6 +7,7 @@
     "type": "git",
     "url": "https://github.com/maxim75/geolinks.git"
   },
+  "main": "dist/geolinks.js",
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",

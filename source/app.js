@@ -6,13 +6,14 @@ var jqueryui = require('jquery-ui');
 var lodash = require('lodash');
 
 var bootstrap = require('bootstrap');
+global.geolinks = require('geolinks');
 
 var GlPage = GlPage || {};
 
 GlPage.ResourceLink = require('./components/ResourceLink.react');
 
 
-
+console.log("global.geolinks", global.geolinks);
 
 GlPage.setLocationUpdates = function(func) {
     var onUpdate = function(position)
@@ -171,6 +172,7 @@ GlPage.GeolinksHomePage = React.createClass({
 
 					<p>Following code generates link to Google Maps centered at Sydney, Australia</p>
 
+
 					<pre>
 						// get link to Google Map (resource ID: "google")
 						var googleMapLink = geolink.getLink("google", &#123;lat: -33.865, lng: 151.209, zoom: 10&#125; );
@@ -180,7 +182,8 @@ GlPage.GeolinksHomePage = React.createClass({
 						<code>googleMapLink</code> is set to <code><a href="https://maps.google.com/maps?ll=-33.865,151.209&q=-33.865,151.209&hl=en&t=m&z=10">https://maps.google.com/maps?ll=-33.865,151.209&q=-33.865,151.209&hl=en&t=m&z=10</a></code>
 					</p>
 
-					<h3>{ geolink.resources.length } Available Resources</h3>
+
+					<h3>{ geolinks.resources.length } Available Resources</h3>
 
 					<GlPage.LocationForm onChange={ this.onFormChange } locationData={ this.state.locationData } useGps={ this.state.useGps } />
 					<GlPage.ResourceList locationData={ this.state.locationData } />
@@ -299,7 +302,7 @@ GlPage.ResourceList = React.createClass({
 	render: function() {
 		var self = this;
 		
-		var resourceNodes = geolink.resources.map(function (x) {
+		var resourceNodes = geolinks.resources.map(function (x) {
 			return (
 				<GlPage.ResourceLink key={x.id} id={x.id}  locationData={ self.props.locationData }>
 				</GlPage.ResourceLink>

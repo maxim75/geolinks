@@ -1,12 +1,30 @@
 {
   "name": "geolinks",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "Links to resources with geographical coordinates",
+  "author": {
+    "name": "Maksym Kozlenko",
+    "email": "max@kozlenko.info",
+    "url": "http://max.kozlenko.info"
+  },
   "author": "Maksym Kozlenko <max@kozlenko.info>",
   "repository": {
     "type": "git",
     "url": "https://github.com/maxim75/geolinks.git"
   },
+  "keywords": [
+    "browser",
+    "maps",
+    "googlemaps",
+    "mapillary",
+    "osm",
+    "geo",
+    "geography",
+    "geospatial",
+    "gis",
+    "geocode",
+    "geolocation"
+  ],
   "main": "dist/geolinks.js",
   "devDependencies": {
     "gulp": "^3.9.0",

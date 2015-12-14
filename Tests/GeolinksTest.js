@@ -171,4 +171,17 @@
 		equal(result.lat, 1.2);
 		equal(result.lng, -34.567);
 	});
+
+	test("parseUrl Google Maps", function() {
+		var result = mod.parseUrl("https://www.google.com.au/maps/place/Douglas+Park/@-34.1909818,150.7130019,15.5z/data=!4m2!3m1!1s0x6b12fc6f59d70d01:0x1d0609b5909b97b0");
+		equal(result.lat, -34.1909818);
+		equal(result.lng, 150.7130019);
+		equal(result.zoom, 15);
+	});
+
+	test("parseUrl Geohack", function() {
+		var result = mod.parseUrl("https://tools.wmflabs.org/geohack/geohack.php?pagename=Douglas_Park_railway_station&params=-34.183237_N_150.710117_E_region:AU-NSW_type:railwaystation");
+		equal(result.lat, -34.183237);
+		equal(result.lng, 150.710117);
+	});
 })(geolink);

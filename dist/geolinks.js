@@ -85,6 +85,34 @@
 	};
 
 	mod.parsers = [
+
+
+		{ 
+			n: "geohack",
+			r: /https:\/\/tools.wmflabs.org\/geohack.*=(-?\d+\.?\d+?)_([NS])_(-?\d+\.?\d+?)_([EW])/, 
+			f: function(r) { 
+				if(r && r.length === 5) {
+					var zoom = Math.floor(parseFloat(r[3]));
+					return { lat: r[1], lng: r[3] };
+				}
+				else {
+					return null;
+				}
+			} 
+		},
+		{ 
+			n: "Google Maps",
+			r: /https?:\/\/www\.google\..*@(-?\d+\.\d+),(-?\d+\.\d+),(\d+\.?\d?)+z/, 
+			f: function(r) { 
+				if(r && r.length === 4) {
+					var zoom = Math.floor(parseFloat(r[3]));
+					return { lat: r[1], lng: r[2], zoom: zoom };
+				}
+				else {
+					return null;
+				}
+			} 
+		},
 		{ 
 			n: "lat,lng",
 			r: /(-?\d+\.\d+)[;, ](-?\d+\.\d+)/, 

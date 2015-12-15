@@ -343,6 +343,6 @@ GlPage.ResourceLink = React.createClass({
 
 
 ReactDOM.render(
-	<GlPage.GeolinksHomePage version="0.7" />,
+	<GlPage.GeolinksHomePage version="0.0.9" />,
 	document.getElementById('content')
 );

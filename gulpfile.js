@@ -8,7 +8,7 @@ var uglify = require('gulp-uglify');
 
 gulp.task('browserify', function () {
 	return browserify('./source/app.js', { debug: true })
-	.transform(babelify, {presets: ["react"]})
+	.transform(babelify, {presets: ["react", "es2015"]})
 	.bundle()
 	.pipe(source('geolinkspage.js'))
 	.pipe(buffer())

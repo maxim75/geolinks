@@ -24,11 +24,24 @@ GlPage.ResourceLink = React.createClass({
 
 		if(url) anchorOpts.href = url;
 
+		var tags = geolinks.resourcesHash[this.props.id].tags;
+
+		var tagNodes = tags 
+			? tags.map(function (x) {
+				return (
+					<span className="label label-default">{x}</span>
+				) })
+			: [];
+		
+
 		return (
 			<div className="container">
 				<div className="row link-grid" id={this.props.key}>
 					<div className="col-sm-6 col-xs-12">
 						<strong>{ this.props.id }</strong>
+						<div>
+							{ tagNodes }
+						</div>
 					</div>
 					<div className="col-sm-6 col-xs-12">
 						<a {...anchorOpts}>

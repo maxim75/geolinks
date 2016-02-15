@@ -320,8 +320,8 @@ GlPage.ResourceList = React.createClass({
 
 
 ReactDOM.render(
-	<GlPage.GeolinksHomePage version="0.7" />,
+	<GlPage.GeolinksHomePage version="0.10" />,
 	document.getElementById('content')
-);
+); 
 
 

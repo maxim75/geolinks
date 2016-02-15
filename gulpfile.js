@@ -19,19 +19,6 @@ gulp.task('test', function() {
 });
 
 gulp.task('build', function() {
-    /*
-    return browserify('./src/Geolinks.js', { debug: true })
-        .transform(babelify, {presets: ["react"]})
-        .bundle()
-        .pipe(source('geolinks.js'))
-        .pipe(buffer())
-        .pipe(sourcemaps.init({ loadMaps: true }))
-        .pipe(uglify())
-        .pipe(sourcemaps.write('./'))
-
-        .pipe(gulp.dest('./dist/'));
-        */
-
     
     gulp.src('src/*.js')
         .pipe(jshint())

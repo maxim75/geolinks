@@ -140,6 +140,14 @@
 	test("geolocator", function() {
 		equal(mod.getLink("geolocator", getTestData()), "http://tools.freeside.sk/geolocator/geolocator.html?params=-1.2_-3.4");
 	});
+
+	test("domain.com.au", function() {
+		equal(mod.getLink("domain.com.au", getTestData()), "http://www.domain.com.au/search/buy/?mode=buy&displmap=1&startloc=-1.2449660802959366%2c-3.444975944263748&endloc=-1.1550339197040633%2c-3.355024055736252");
+	});
+
+	test("commercialrealestate.com.au", function() {
+		equal(mod.getLink("commercialrealestate.com.au", getTestData()), "http://www.commercialrealestate.com.au/for-sale/?bb=-1.1550339197040633%2C-1.2449660802959366%2C-3.355024055736252%2C-3.444975944263748%2C8");
+	});
 })(geolink);
 
 

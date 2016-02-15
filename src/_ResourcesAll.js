@@ -112,6 +112,12 @@
         },
 
         {
+            id: "domain.com.au",
+            template: "http://www.domain.com.au/search/buy/?mode=buy&displmap=1&startloc={bbSouth}%2c{bbWest}&endloc={bbNorth}%2c{bbEast}",
+            tags: [ "real estate", "country-au" ]
+        },
+
+        {
             id: "zillow",
             template: "http://www.zillow.com/homes/for_sale/featured_sort/{bbNorth},{bbEast},{bbSouth},{bbWest}_rect/",
             tags: [ "real estate", "country-us" ]

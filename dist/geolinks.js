@@ -362,7 +362,11 @@ if(typeof module !== 'undefined') module.exports = geolink;
             tags: [ ]
         },
 
-    
+        {
+            id: "geolinks",
+            template: "http://geolinks.kozlenko.info/?q={latdegdec},{londegdec}",
+            tags: [ ]
+        },
     ];
 
     mod.resourcesHash = {};

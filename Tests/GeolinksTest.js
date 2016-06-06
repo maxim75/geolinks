@@ -148,6 +148,10 @@
 	test("commercialrealestate.com.au", function() {
 		equal(mod.getLink("commercialrealestate.com.au", getTestData()), "http://www.commercialrealestate.com.au/for-sale/?bb=-1.1550339197040633%2C-1.2449660802959366%2C-3.355024055736252%2C-3.444975944263748%2C8");
 	});
+
+	test("geolinks", function() {
+		equal(mod.getLink("geolinks", getTestData()), "http://geolinks.kozlenko.info/?q=-1.2,-3.4");
+	});
 })(geolink);
 
 

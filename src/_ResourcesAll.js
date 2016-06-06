@@ -208,7 +208,11 @@
             tags: [ ]
         },
 
-    
+        {
+            id: "geolinks",
+            template: "http://geolinks.kozlenko.info/?q={latdegdec},{londegdec}",
+            tags: [ ]
+        },
     ];
 
     mod.resourcesHash = {};

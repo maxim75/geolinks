@@ -183,11 +183,6 @@ if(typeof module !== 'undefined') module.exports = geolink;
         },
 
         { 
-            id: "wikimapia", 
-            template: "http://wikimapia.org/#lang={language}&lat={latdegdec}&lon={londegdec}&z={osmzoom}&m=w"
-        },
-
-        { 
             id: "geolocation.ws", 
             template: "https://www.geolocation.ws/map/{latdegdec},{londegdec}/{osmzoom}",
             tags: [ "photo" ]

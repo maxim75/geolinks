@@ -135,6 +135,8 @@
 
 	mod.getLink = function(resourceId, data) {
 		var resource = mod.resourcesHash[resourceId];
+
+		if(!resource) throw ("Invalid resource ID: " + resourceId);
 		return mod.getLinkFromTemplate(resource.template, data);
 	};
 

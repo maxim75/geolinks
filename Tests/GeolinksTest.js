@@ -152,6 +152,10 @@
 	test("geolinks", function() {
 		equal(mod.getLink("geolinks", getTestData()), "http://geolinks.kozlenko.info/?q=-1.2,-3.4");
 	});
+
+	test("INVALID", function() {
+		throws(function() { mod.getLink("INVALID", getTestData()) }, "Invalid resource ID: INVALID" ,"Exception expected");
+	});
 })(geolink);
 
 

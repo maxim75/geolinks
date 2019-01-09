@@ -36,11 +36,15 @@
     "gulp-util": "^3.0.6",
     "jshint": "^2.9.7",
     "jshint-stylish": "^2.0.1",
+    "qunit": "^2.9.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^2.0.0"
   },
   "scripts": {
     "test": "gulp"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "hoek": "^6.1.2"
+  }
 }

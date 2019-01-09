@@ -175,7 +175,7 @@ var geolink = geolink || {};
     {
       id: "google",
       template:
-        "https://maps.google.com/maps?ll={latdegdec},{londegdec}&q={latdegdec},{londegdec}&hl={language}&t=m&z={osmzoom}"
+        "https://www.google.com/maps?ll={latdegdec},{londegdec}&q={latdegdec},{londegdec}&hl={language}&t=m&z={osmzoom}"
     },
 
     {

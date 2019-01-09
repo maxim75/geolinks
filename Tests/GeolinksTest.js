@@ -75,7 +75,11 @@
 
     var getTestData = function() {
     	return { lat: -1.2, lng: -3.4, zoom: 8, title: "ABC DEF", language: "uk" };
-    };
+	};
+	
+	test("google", function() {
+		equal(mod.getLink("google", getTestData()), "https://www.google.com/maps?ll=-1.2,-3.4&q=-1.2,-3.4&hl=uk&t=m&z=8");
+	});
 
 	test("osm", function() {
 		equal(mod.getLink("osm", getTestData()), "https://www.openstreetmap.org/?mlat=-1.2&mlon=-3.4&zoom=8&layers=M");

@@ -22,7 +22,7 @@
     "babelify": "^7.2.0",
     "bootstrap": "^3.3.6",
     "browserify": "^12.0.1",
-    "geolinks": "0.0.15",
+    "geolinks": "0.0.17",
     "gulp": "^3.9.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.1",

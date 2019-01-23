@@ -157,6 +157,10 @@
 		equal(mod.getLink("geolinks", getTestData()), "http://geolinks.kozlenko.info/?q=-1.2,-3.4");
 	});
 
+	test("wikishootme", function() {
+		equal(mod.getLink("wikishootme", getTestData()), "https://tools.wmflabs.org/wikishootme/index.html#lat=-1.2&lng=-3.4&zoom=8");
+	});
+
 	test("INVALID", function() {
 		throws(function() { mod.getLink("INVALID", getTestData()) }, "Invalid resource ID: INVALID" ,"Exception expected");
 	});

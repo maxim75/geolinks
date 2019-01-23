@@ -226,6 +226,10 @@ var geolink = geolink || {};
       id: "geolinks",
       template: "http://geolinks.kozlenko.info/?q={latdegdec},{londegdec}",
       tags: []
+    },
+    {
+      id: "wikishootme",
+      template: "https://tools.wmflabs.org/wikishootme/index.html#lat={latdegdec}&lng={londegdec}&zoom={osmzoom}"
     }
   ];
 

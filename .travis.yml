@@ -3,4 +3,4 @@ node_js:
   - "12.16.1"
 before_script:
   - npm install -g jest
-script: test
+script: npm run test

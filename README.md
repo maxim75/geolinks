@@ -18,6 +18,5 @@ More details and interactive demo available at
 
 [http://geolinks.kozlenko.info/](http://geolinks.kozlenko.info/)
 
-[![Version Badge][npm-img]][npm-url]
 [![Build Status](https://travis-ci.org/maxim75/geolinks.svg)](https://travis-ci.org/maxim75/geolinks)
 

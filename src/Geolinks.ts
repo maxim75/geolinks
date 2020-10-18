@@ -1,11 +1,11 @@
 /*
- * Copyright (C) 2015 Maksym Kozlenko <max@kozlenko.info>
+ * Copyright (C) 2020 Maksym Kozlenko <max@kozlenko.info>
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
  */
 
-import { resourcesHash } from './Resources';
+import { Resource, resources, resourcesHash, ResourceTemplate } from './Resources';
 
 interface LocationData {
   lat: number;
@@ -157,12 +157,16 @@ const getFieldsFromTemplate = function(template: string) {
   return template.match(fieldMatchRegExp);
 };
 
-export const getLink = function(resourceId: string, data: LocationData) {
+export function getLink (resourceId: string, data: LocationData): string {
   const resource = resourcesHash[resourceId];
 
   if (!resource) throw new Error(`Invalid resource ID: ${resourceId}`);
   return getLinkFromTemplate(resource.template, data);
 };
+
+export function getResourceList(): Resource[] {
+  return resources.map(resource => ({ "id": resource.id, "tags": resource.tags }));
+}
 
 export const parseUrl = function(url: string) {
   let result: LocationData | null = defaultData;

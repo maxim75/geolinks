@@ -1,11 +1,19 @@
 /*
- * Copyright (C) 2015 Maksym Kozlenko <max@kozlenko.info>
+ * Copyright (C) 2020 Maksym Kozlenko <max@kozlenko.info>
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
  */
 
-const resources = [
+ export interface Resource {
+   id: string;
+   tags?: string[];
+ }
+ export interface ResourceTemplate extends Resource {
+  template: string;
+}
+
+export const resources: ResourceTemplate[] = [
   {
     id: 'bing',
     template:
@@ -67,12 +75,6 @@ const resources = [
   {
     id: 'flickr',
     template: 'https://www.flickr.com/map/?fLat={latdegdec}&fLon={londegdec}&zl={osmzoom}',
-    tags: ['photo'],
-  },
-
-  {
-    id: 'panoramio',
-    template: 'http://www.panoramio.com/map/#lt={latdegdec}&ln={londegdec}&z=0&k=0&a=1&tab=1',
     tags: ['photo'],
   },
 

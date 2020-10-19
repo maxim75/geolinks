@@ -196,13 +196,11 @@ export const resources: ResourceTemplate[] = [
     template: 'http://www.geonames.org/maps/google_{latdegdec}_{londegdec}.html',
     tags: [],
   },
-
   {
     id: 'geolocator',
     template: 'http://tools.freeside.sk/geolocator/geolocator.html?params={latdegdec}_{londegdec}',
     tags: [],
   },
-
   {
     id: 'geolinks',
     template: 'http://geolinks.kozlenko.info/?q={latdegdec},{londegdec}',
@@ -212,6 +210,10 @@ export const resources: ResourceTemplate[] = [
     id: 'wikishootme',
     template: 'https://tools.wmflabs.org/wikishootme/index.html#lat={latdegdec}&lng={londegdec}&zoom={osmzoom}',
   },
+  {
+    id: 'geolocator',
+    template: 'https://tools.freeside.sk/geolocator/geolocator.html?{latdegdec},{londegdec}'
+  }
 ];
 
 export const resourcesHash = resources.reduce((map: any, obj: any) => { map[obj.id] = obj; return map; }, {});

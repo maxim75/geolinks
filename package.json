@@ -1,6 +1,6 @@
 {
   "name": "geolinks",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Links to resources with geographical coordinates",
   "author": "Maksym Kozlenko <max@kozlenko.info>",
   "repository": {

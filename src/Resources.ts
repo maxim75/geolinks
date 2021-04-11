@@ -5,11 +5,11 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
- export interface Resource {
-   id: string;
-   tags?: string[];
- }
- export interface ResourceTemplate extends Resource {
+export interface Resource {
+  id: string;
+  tags?: string[];
+}
+export interface ResourceTemplate extends Resource {
   template: string;
 }
 
@@ -19,13 +19,15 @@ export const resources: ResourceTemplate[] = [
     template:
       'https://www.bing.com/maps/?v=2&cp={latdegdec}~{londegdec}&style=r&lvl={osmzoom}&sp=Point.{latdegdec}_{londegdec}_{titlee}___',
   },
-
   {
     id: 'google',
     template:
       'https://www.google.com/maps?ll={latdegdec},{londegdec}&q={latdegdec},{londegdec}&hl={language}&t=m&z={osmzoom}',
   },
-
+  {
+    id: 'google navigate',
+    template: 'https://www.google.com/maps/dir/?api=1&destination={latdegdec},{londegdec}',
+  },
   {
     id: 'osm',
     template: 'https://www.openstreetmap.org/?mlat={latdegdec}&mlon={londegdec}&zoom={osmzoom}&layers=M',
@@ -33,7 +35,8 @@ export const resources: ResourceTemplate[] = [
 
   {
     id: 'yandex',
-    template: 'https://maps.yandex.ru/?ll={londegdec},{latdegdec}&spn={span},{span}&l=map&pt={londegdec},{latdegdec}',
+    template:
+      'https://maps.yandex.ru/?ll={londegdec},{latdegdec}&spn={span},{span}&l=map&pt={londegdec},{latdegdec}&z={osmzoom}',
   },
 
   {
@@ -212,8 +215,11 @@ export const resources: ResourceTemplate[] = [
   },
   {
     id: 'geolocator',
-    template: 'https://tools.freeside.sk/geolocator/geolocator.html?{latdegdec},{londegdec}'
-  }
+    template: 'https://tools.freeside.sk/geolocator/geolocator.html?{latdegdec},{londegdec}',
+  },
 ];
 
-export const resourcesHash = resources.reduce((map: any, obj: any) => { map[obj.id] = obj; return map; }, {});
+export const resourcesHash = resources.reduce((map: any, obj: any) => {
+  map[obj.id] = obj;
+  return map;
+}, {});
